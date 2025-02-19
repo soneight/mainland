@@ -1,0 +1,78 @@
+#include <son8/main.hxx>
+
+#include <atomic>
+#include <cstdlib>
+#include <new>
+
+namespace son8 {
+    // Args pImpl
+    class Args::Impl_ final {
+        friend class Args;
+        Span_ args_;
+        Impl_(int argc, char *argv[]) noexcept : args_{ argc, argv } { }
+    public:
+        ~Impl_() = default;
+
+        Impl_() = delete;
+        Impl_(Impl_ &&) = delete;
+        Impl_(Impl_ const &) = delete;
+        Impl_ &operator=(Impl_ &&) = delete;
+        Impl_ &operator=(Impl_ const &) = delete;
+
+        auto begin() const noexcept { return args_.begin(); }
+        auto end() const noexcept { return args_.end(); }
+        auto size() const noexcept { return args_.size(); }
+    }; // class Args::Impl_
+    // ArgsStorage
+    namespace privates {
+        class ArgsStorage_ {
+        public:
+            alignas(Args::Impl_) char impl_storage[sizeof(Args::Impl_)];
+            Args const &args(int argc, char *argv[]) const noexcept {
+                static Args args_{ argc, argv };
+                return args_;
+            }
+        }; // class ArgsStorage_
+
+        static auto &args_storage() noexcept {
+
+            static ArgsStorage_ storage_;
+            return storage_;
+        }
+    } // namespace son8::privates
+    // Args
+    Args::Args(int argc, char *argv[]) noexcept
+    : implPtr_{ new (privates::args_storage().impl_storage) Impl_{argc, argv} }
+    { }
+    Args::~Args() { implPtr_->~Impl_(); }
+    Args::iterator Args::begin() const noexcept { return implPtr_->begin(); }
+    Args::iterator Args::end() const noexcept { return implPtr_->end(); }
+    int Args::size() const noexcept { return implPtr_->size(); }
+    // Exit
+    namespace {
+        std::atomic< int > exit_value{EXIT_SUCCESS};
+    }
+    void Exit::operator=(int value) const noexcept {
+        exit_value.store(value, std::memory_order_relaxed);
+    }
+    void Exit::operator()() const noexcept {
+        std::exit(exit_value.load(std::memory_order_relaxed));
+    }
+    void Exit::operator()(int value) const noexcept {
+        exit_value.store(value, std::memory_order_relaxed);
+        std::exit(value);
+    }
+    int Exit::get() const noexcept {
+        return exit_value.load(std::memory_order_relaxed);
+    }
+} // namespace son8
+
+auto main(int argc, char *argv[]) -> int try {
+    son8::Args const &args = son8::privates::args_storage().args(argc, argv);
+    son8::main(args);
+    son8::exit();
+} catch (...) {
+    throw;
+} // main() try
+
+// Ⓒ 2025 Oleg'Ease'Kharchuk ᦒ
