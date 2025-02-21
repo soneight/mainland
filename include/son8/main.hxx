@@ -6,27 +6,14 @@
 namespace son8 {
 
     class Args final {
-        struct Span_ final {
-            using element_type = char *;
-            using iterator = element_type const *;
-            Span_(int size, element_type *data) noexcept : size_{ size }, data_{ data } { }
-            int size() const noexcept { return size_; }
-            iterator begin() const noexcept { return data_;}
-            iterator end() const noexcept { return data_ + size_; }
-        private:
-            int size_;
-            element_type *data_;
-        }; // struct Span_
-        class Storage_;
-        friend class Storage_;
         class Impl_;
         Impl_ *implPtr_;
         Args(int args, char *argv[]) noexcept;
     public:
         ~Args();
-        using Storage = Storage_;
-        using iterator = Span_::iterator;
-
+        class Storage;
+        using arg = char const *;
+        using iterator = arg const *;
         Args() = delete;
         Args(Args &&) = delete;
         Args(Args const &) = delete;
@@ -35,6 +22,8 @@ namespace son8 {
 
         [[nodiscard]] iterator begin() const noexcept;
         [[nodiscard]] iterator end() const noexcept;
+        [[nodiscard]] iterator cbegin() const noexcept;
+        [[nodiscard]] iterator cend() const noexcept;
         [[nodiscard]] int size() const noexcept;
     }; // class Args
 
