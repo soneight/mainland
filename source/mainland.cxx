@@ -23,26 +23,22 @@ namespace son8 {
         auto end() const noexcept { return args_.end(); }
         auto size() const noexcept { return args_.size(); }
     }; // class Args::Impl_
-    // ArgsStorage
-    namespace privates {
-        class ArgsStorage_ {
-        public:
-            alignas(Args::Impl_) char impl_storage[sizeof(Args::Impl_)];
-            Args const &args(int argc, char *argv[]) const noexcept {
-                static Args args_{ argc, argv };
-                return args_;
-            }
-        }; // class ArgsStorage_
-
-        static auto &args_storage() noexcept {
-
-            static ArgsStorage_ storage_;
+    // Args Storage
+    class Args::Storage_ final {
+    public:
+        alignas(Args::Impl_) char impl_storage[sizeof(Args::Impl_)];
+        Args const &args(int argc, char *argv[]) const noexcept {
+            static Args args_{ argc, argv };
+            return args_;
+        }
+        static auto &get() noexcept {
+            static Storage_ storage_;
             return storage_;
         }
-    } // namespace son8::privates
+    }; // class ArgsStorage_
     // Args
     Args::Args(int argc, char *argv[]) noexcept
-    : implPtr_{ new (privates::args_storage().impl_storage) Impl_{argc, argv} }
+    : implPtr_{ new (Args::Storage::get().impl_storage) Impl_{argc, argv} }
     { }
     Args::~Args() { implPtr_->~Impl_(); }
     Args::iterator Args::begin() const noexcept { return implPtr_->begin(); }
@@ -68,7 +64,7 @@ namespace son8 {
 } // namespace son8
 
 auto main(int argc, char *argv[]) -> int try {
-    son8::Args const &args = son8::privates::args_storage().args(argc, argv);
+    son8::Args const &args = son8::Args::Storage::get().args(argc, argv);
     son8::main(args);
     son8::exit();
 } catch (...) {

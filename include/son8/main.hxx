@@ -4,12 +4,8 @@
 #include <son8/exit.hxx>
 
 namespace son8 {
-    namespace privates {
-        class ArgsStorage_;
-    } // namespace son8::privates
 
     class Args final {
-        friend class privates::ArgsStorage_;
         struct Span_ final {
             using element_type = char *;
             using iterator = element_type const *;
@@ -21,11 +17,14 @@ namespace son8 {
             int size_;
             element_type *data_;
         }; // struct Span_
+        class Storage_;
+        friend class Storage_;
         class Impl_;
         Impl_ *implPtr_;
         Args(int args, char *argv[]) noexcept;
     public:
         ~Args();
+        using Storage = Storage_;
         using iterator = Span_::iterator;
 
         Args() = delete;
