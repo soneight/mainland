@@ -9,11 +9,11 @@ namespace son8 {
     class Args::Impl_ final {
         friend class Args;
         struct Span_ final {
-            using iterator = Args::iterator;
+            using Iterator = Args::Iterator;
             Span_( int size, char **data ) noexcept : size_{ size }, data_{ data } { }
             int size( ) const noexcept { return size_; }
-            iterator begin( ) const noexcept { return data_;}
-            iterator end( ) const noexcept { return data_ + size_; }
+            Iterator begin( ) const noexcept { return data_;}
+            Iterator end( ) const noexcept { return data_ + size_; }
         private:
             int size_;
             char **data_;
@@ -51,10 +51,10 @@ namespace son8 {
     : implPtr_{ new (Args::Storage::get( ).impl_storage ) Impl_{ argc, argv } }
     { }
     Args::~Args( ) { implPtr_->~Impl_( ); }
-    Args::iterator Args::begin( ) const noexcept { return implPtr_->begin( ); }
-    Args::iterator Args::end( ) const noexcept { return implPtr_->end( ); }
-    Args::iterator Args::cbegin( ) const noexcept { return implPtr_->begin( ); }
-    Args::iterator Args::cend( ) const noexcept { return implPtr_->end( ); }
+    Args::Iterator Args::begin( ) const noexcept { return implPtr_->begin( ); }
+    Args::Iterator Args::end( ) const noexcept { return implPtr_->end( ); }
+    Args::Iterator Args::cbegin( ) const noexcept { return implPtr_->begin( ); }
+    Args::Iterator Args::cend( ) const noexcept { return implPtr_->end( ); }
     int Args::size( ) const noexcept { return implPtr_->size( ); }
     // Exit
     namespace {

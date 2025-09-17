@@ -12,18 +12,18 @@ namespace son8 {
     public:
         ~Args( );
         class Storage;
-        using arg = char const *;
-        using iterator = arg const *;
+        using Arg = char const *;
+        using Iterator = Arg const *;
         Args( ) = delete;
         Args( Args && ) = delete;
         Args( Args const & ) = delete;
         Args &operator=( Args && ) = delete;
         Args &operator=( Args const & ) = delete;
 
-        [[nodiscard]] iterator begin( ) const noexcept;
-        [[nodiscard]] iterator end( ) const noexcept;
-        [[nodiscard]] iterator cbegin( ) const noexcept;
-        [[nodiscard]] iterator cend( ) const noexcept;
+        [[nodiscard]] Iterator begin( ) const noexcept;
+        [[nodiscard]] Iterator end( ) const noexcept;
+        [[nodiscard]] Iterator cbegin( ) const noexcept;
+        [[nodiscard]] Iterator cend( ) const noexcept;
         [[nodiscard]] int size( ) const noexcept;
     }; // class Args
 
