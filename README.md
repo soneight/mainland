@@ -1,6 +1,6 @@
 # MAINLAND
 
-> Wrapper of main function and its arguments for C++17
+> C++17 wrapper for main function and its arguments
 
 ## Usage
 
@@ -10,8 +10,8 @@
 void son8::main( Args const &args ) {
     auto mainland = ( args.end( ) - args.begin( ) );
     if ( mainland % 2 == 0 ) exit = 8;
-    if ( args.size( ) > 2 ) exit(args.size());
-    if ( exit.get( ) == 8 ) exit();
+    if ( args.size( ) > 2 ) exit( args.size( ) );
+    if ( exit.get( ) == 8 ) exit( );
 } // return args|1 = 0, args|2 = 8, args|3+ = 3+
 ```
 
@@ -19,4 +19,4 @@ void son8::main( Args const &args ) {
 
 * main is void because otherwise it would crush when forget to return, so use exit class for return values
 
-###### each folder MAY contain README with additional information about project
+###### each folder MAY contain README with additional materials
