@@ -61,8 +61,8 @@ namespace son8 {
         std::atomic< int > exit_value{ EXIT_SUCCESS };
     }
 
-    int Exit::Success = EXIT_SUCCESS;
-    int Exit::Failure = EXIT_FAILURE;
+    int const Exit::Success = EXIT_SUCCESS;
+    int const Exit::Failure = EXIT_FAILURE;
 
     void Exit::success( ) noexcept { exit( Success ); }
     void Exit::failure( ) noexcept { exit( Failure ); }
