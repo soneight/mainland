@@ -60,6 +60,13 @@ namespace son8 {
     namespace {
         std::atomic< int > exit_value{ EXIT_SUCCESS };
     }
+
+    int Exit::Success = EXIT_SUCCESS;
+    int Exit::Failure = EXIT_FAILURE;
+
+    void Exit::success( ) noexcept { exit( Success ); }
+    void Exit::failure( ) noexcept { exit( Failure ); }
+
     void Exit::operator=( int value ) const noexcept {
         exit_value.store( value, std::memory_order_relaxed );
     }
@@ -73,6 +80,8 @@ namespace son8 {
     int Exit::get( ) const noexcept {
         return exit_value.load( std::memory_order_relaxed );
     }
+
+
 } // namespace son8
 
 auto main( int argc, char *argv[] ) -> int try {

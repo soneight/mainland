@@ -14,6 +14,11 @@ namespace son8 {
         void operator()( ) const noexcept;
         void operator()( int value ) const noexcept;
         int get( ) const noexcept;
+        // EXIT_SUCCESS and EXIT_FAILURE (no constexpr to avoid including stdlib header)
+        static int Success;
+        static int Failure;
+        static void success( ) noexcept;
+        static void failure( ) noexcept;
     }; // class Exit
 
     inline Exit exit;
