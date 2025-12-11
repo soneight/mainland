@@ -7,7 +7,7 @@
 ```cxx
 #include <son8/main.hxx>
 // son8::exit is return replacement class thats calls std::exit
-void son8::main( Args const &args ) {
+void son8::main( Args args ) {
     auto mainland = ( args.end( ) - args.begin( ) );
     if ( mainland % 2 == 0 ) exit = 8;
     if ( args.size( ) > 2 ) exit( args.size( ) );
