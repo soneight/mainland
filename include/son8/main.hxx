@@ -5,29 +5,31 @@
 
 namespace son8 {
 
-    class Args final {
+    class Arguments final {
         class Impl_;
         Impl_ *implPtr_;
-        Args( int args, char *argv[] ) noexcept;
+        Arguments( int args, char *argv[] ) noexcept;
     public:
-        ~Args( );
+        ~Arguments( );
         class Storage;
         using Arg = char const *;
         using Iterator = Arg const *;
-        Args( ) = delete;
-        Args( Args && ) = delete;
-        Args( Args const & ) = delete;
-        Args &operator=( Args && ) = delete;
-        Args &operator=( Args const & ) = delete;
+        Arguments( ) = delete;
+        Arguments( Arguments && ) = delete;
+        Arguments( Arguments const & ) = delete;
+        Arguments &operator=( Arguments && ) = delete;
+        Arguments &operator=( Arguments const & ) = delete;
 
         [[nodiscard]] Iterator begin( ) const noexcept;
         [[nodiscard]] Iterator end( ) const noexcept;
         [[nodiscard]] Iterator cbegin( ) const noexcept;
         [[nodiscard]] Iterator cend( ) const noexcept;
         [[nodiscard]] int size( ) const noexcept;
-    }; // class Args
+    }; // class Arguments
 
-    void main( Args const &args );
+    using Args = Arguments const &;
+
+    void main( Args args );
 } // namespace son8
 
 #endif//SON8_MAIN_HXX
