@@ -4,10 +4,10 @@ usage:
 	cat Makefile.usage.txt
 
 cmake:
-	cd build && cmake -GNinja -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .. && cd ..
+	cmake -B build/ -GNinja -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 
 ninja:
-	cd build && ninja && cd ..
+	ninja -C build/
 
 ctest:
 	ctest --test-dir build --output-on-failure

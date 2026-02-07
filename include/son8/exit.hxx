@@ -19,6 +19,10 @@ namespace son8 {
         static int const Failure;
         static void success( ) noexcept;
         static void failure( ) noexcept;
+        struct Edit {
+            static void success( ) noexcept;
+            static void failure( ) noexcept;
+        };
     }; // class Exit
 
     inline Exit exit;
@@ -26,4 +30,4 @@ namespace son8 {
 
 #endif//SON8_EXIT_HXX
 
-// Ⓒ 2025 Oleg'Ease'Kharchuk ᦒ
+// Ⓒ 2025-2026 Oleg'Ease'Kharchuk ᦒ

@@ -75,10 +75,17 @@ namespace son8 {
     }
     void Exit::operator()( int value ) const noexcept {
         exit_value.store( value, std::memory_order_relaxed );
-        std::exit( value );
+        exit( );
     }
     int Exit::get( ) const noexcept {
         return exit_value.load( std::memory_order_relaxed );
+    }
+    // edit
+    void Exit::Edit::failure( ) noexcept {
+        exit = Exit::Failure;
+    }
+    void Exit::Edit::success( ) noexcept {
+        exit = Exit::Success;
     }
 
 
@@ -92,4 +99,4 @@ auto main( int argc, char *argv[] ) -> int try {
     throw;
 } // main() try
 
-// Ⓒ 2025 Oleg'Ease'Kharchuk ᦒ
+// Ⓒ 2025-2026 Oleg'Ease'Kharchuk ᦒ
