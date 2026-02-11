@@ -10,7 +10,7 @@ ninja:
 	ninja -C build/
 
 ctest:
-	ctest --test-dir build --output-on-failure
+	ctest --test-dir build/ --output-on-failure
 
 clean:
 	rm -rf build/ && git restore build/.gitignore
