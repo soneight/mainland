@@ -1,8 +1,9 @@
 #include <son8/main.hxx>
-
-#include <atomic>
-#include <cstdlib>
-#include <new>
+// std
+#include <atomic> // atomic, memory_order_relaxed
+#include <cstddef> // byte
+#include <cstdlib> // exit, EXIT_(FAILURE|SUCCESS)
+#include <new> // [placement new]
 
 namespace son8 {
     // Arguments pImpl
@@ -36,7 +37,7 @@ namespace son8 {
     // Arguments Storage
     class Arguments::Storage final {
     public:
-        alignas( Arguments::Impl_ ) char impl_storage[sizeof( Arguments::Impl_ )];
+        alignas( Arguments::Impl_ ) std::byte impl_storage[sizeof( Arguments::Impl_ )];
         Arguments const &args( int argc, char *argv[] ) const noexcept {
             static Arguments args_{ argc, argv };
             return args_;
@@ -71,7 +72,7 @@ namespace son8 {
         exit_value.store( value, std::memory_order_relaxed );
     }
     void Exit::operator()( ) const noexcept {
-        std::exit( exit_value.load( std::memory_order_relaxed ) );
+        std::exit( get( ) );
     }
     void Exit::operator()( int value ) const noexcept {
         exit_value.store( value, std::memory_order_relaxed );
