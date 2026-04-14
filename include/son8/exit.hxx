@@ -13,7 +13,7 @@ namespace son8 {
         void operator=( int value ) const noexcept;
         [[noreturn]] void operator()( ) const;
         [[noreturn]] void operator()( int value ) const;
-        int get( ) const noexcept;
+        [[nodiscard]] int get( ) const noexcept;
         // EXIT_SUCCESS and EXIT_FAILURE (no constexpr to avoid including stdlib header)
         static int const Success;
         static int const Failure;
