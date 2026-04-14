@@ -71,7 +71,7 @@ namespace son8 {
         exit_value.store( value, std::memory_order_relaxed );
     }
     void Exit::operator()( ) const noexcept {
-        std::exit( exit_value.load( std::memory_order_relaxed ) );
+        std::exit( get( ) );
     }
     void Exit::operator()( int value ) const noexcept {
         exit_value.store( value, std::memory_order_relaxed );
