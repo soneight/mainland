@@ -11,14 +11,14 @@ namespace son8 {
         Exit &operator=( Exit && ) = delete;
         Exit &operator=( Exit const & ) = delete;
         void operator=( int value ) const noexcept;
-        void operator()( ) const noexcept;
-        void operator()( int value ) const noexcept;
+        [[noreturn]] void operator()( ) const;
+        [[noreturn]] void operator()( int value ) const;
         int get( ) const noexcept;
         // EXIT_SUCCESS and EXIT_FAILURE (no constexpr to avoid including stdlib header)
         static int const Success;
         static int const Failure;
-        static void success( ) noexcept;
-        static void failure( ) noexcept;
+        [[noreturn]] static void success( );
+        [[noreturn]] static void failure( );
         struct Edit {
             static void success( ) noexcept;
             static void failure( ) noexcept;

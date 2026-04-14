@@ -65,16 +65,16 @@ namespace son8 {
     int const Exit::Success = EXIT_SUCCESS;
     int const Exit::Failure = EXIT_FAILURE;
 
-    void Exit::success( ) noexcept { exit( Success ); }
-    void Exit::failure( ) noexcept { exit( Failure ); }
+    void Exit::success( ) { exit( Success ); }
+    void Exit::failure( ) { exit( Failure ); }
 
     void Exit::operator=( int value ) const noexcept {
         exit_value.store( value, std::memory_order_relaxed );
     }
-    void Exit::operator()( ) const noexcept {
+    void Exit::operator()( ) const {
         std::exit( get( ) );
     }
-    void Exit::operator()( int value ) const noexcept {
+    void Exit::operator()( int value ) const {
         exit_value.store( value, std::memory_order_relaxed );
         exit( );
     }
