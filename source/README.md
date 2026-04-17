@@ -1,5 +1,4 @@
 ## SOURCE
-
-> Project Source Files
+> Project Source Code Files
 
 ###### Anything other than source code SHOULD avoid this folder
