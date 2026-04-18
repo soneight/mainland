@@ -9,4 +9,4 @@ target_sources( ${SON8_LIB} PRIVATE mainland.cxx )
 # NO WARRANTY OF ANY KIND see <http://www.apache.org/licenses/LICENSE-2.0>
 # SPDX-License-Identifier: Apache-2.0
 # lib: `mainland` C++17 Main Function Wrapper
-# Ⓒ Copyright (c) [YEAR] Oleg'Ease'Kharchuk ᦒ
+# Ⓒ Copyright (c) 2025-2026 Oleg'Ease'Kharchuk ᦒ

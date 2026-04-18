@@ -12,4 +12,4 @@ target_include_directories( ${SON8_LIB} PUBLIC include )
 # NO WARRANTY OF ANY KIND see <http://www.apache.org/licenses/LICENSE-2.0>
 # SPDX-License-Identifier: Apache-2.0
 # lib: `mainland` C++17 Main Function Wrapper
-# Ⓒ Copyright (c) [YEAR] Oleg'Ease'Kharchuk ᦒ
+# Ⓒ Copyright (c) 2025-2026 Oleg'Ease'Kharchuk ᦒ
