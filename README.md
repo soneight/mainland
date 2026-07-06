@@ -3,6 +3,8 @@
 
 ## Usage
 
+### Example
+
 ```cxx
 #include <son8/main.hxx>
 // son8::exit is return replacement class thats calls std::exit
@@ -13,6 +15,15 @@ void son8::main( Args args ) {
     if ( exit.get( ) == 8 ) exit( );
 } // return args|1 = 0, args|2 = 8, args|3+ = 3+
 ```
+
+### Quick notes
+
+- `Args`: here is const reference type, same as `Arguments const &`
+- `args`: support `size( ) -> size_t, for range begin/end -> char const *const *`
+- `Exit::Success / Exit::Failure`: `EXIT_SUCCESS / EXIT_FAILURE`
+- `exit = [[ value ]] or Exit::Edit::[[ success( ) / failure( ) ]]`: updating exit value without calling exit
+- `exit( ) or exit( [[ value ]] ) or Exit::[[ success( ) / failure( ) ]]`: emergency exit without clearing stack
+- `exit.get( )`: get current exit value, by default equal to `Exit::Success`
 
 ### Reminder
 
