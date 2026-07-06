@@ -89,13 +89,12 @@ namespace son8 {
         exit = Exit::Success;
     }
 
-
 } // namespace son8
 
 auto main( int argc, char *argv[] ) -> int try {
     son8::Arguments const &args = son8::Arguments::Storage::get( ).args( argc, argv );
     son8::main( args );
-    son8::exit( );
+    return son8::exit.get( );
 } catch ( ... ) {
     throw;
 } // main() try
