@@ -1,9 +1,10 @@
 #include <son8/main.hxx>
 // std
-#include <atomic> // atomic, memory_order_relaxed
-#include <cstddef> // byte
-#include <cstdlib> // exit, EXIT_(FAILURE|SUCCESS)
-#include <new> // [placement new]
+#include <atomic> // `atomic, memory_order_relaxed`
+#include <cstddef> // `byte`
+#include <cstdlib> // `exit, EXIT_(FAILURE|SUCCESS)`
+#include <new> // `[placement new]`
+#include <stdexcept> // `out_of_range`
 
 namespace son8 {
     // Arguments `pImpl`
@@ -60,7 +61,8 @@ namespace son8 {
     // array operators
     // -- safe: argument cannot be empty, is it good to return empty character array then?
     auto Arguments::operator[]( signed idxSafe ) const -> Arguments::Arg {
-        return ( static_cast< unsigned >( idxSafe ) < size( ) ) ? *( begin( ) + idxSafe ) : "";
+        if ( static_cast< unsigned >( idxSafe ) < size( ) ) return *( begin( ) + idxSafe );
+        throw std::out_of_range{ "son8::mainland: Arguments signed index safe array operator out of range access" };
     }
     // -- unsafe(unsigned)
     auto Arguments::operator[]( unsigned idx ) const noexcept -> Arguments::Arg {
