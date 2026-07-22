@@ -6,15 +6,15 @@
 #include <new> // [placement new]
 
 namespace son8 {
-    // Arguments pImpl
+    // Arguments `pImpl`
     class Arguments::Impl_ final {
         friend class Arguments;
         struct Span_ final {
             using Iterator = Arguments::Iterator;
             Span_( int size, char **data ) noexcept : size_{ size }, data_{ data } { }
-            int size( ) const noexcept { return size_; }
-            Iterator begin( ) const noexcept { return data_;}
-            Iterator end( ) const noexcept { return data_ + size_; }
+            auto size( ) const noexcept { return size_; }
+            auto begin( ) const noexcept -> Iterator { return data_;}
+            auto end( ) const noexcept -> Iterator { return data_ + size_; }
         private:
             int size_;
             char **data_;
@@ -33,7 +33,7 @@ namespace son8 {
         auto begin( ) const noexcept { return args_.begin( ); }
         auto end( ) const noexcept { return args_.end( ); }
         auto size( ) const noexcept { return args_.size( ); }
-    }; // class Arguments::Impl_
+    }; // class `Arguments::Impl_`
     // Arguments Storage
     class Arguments::Storage final {
     public:
@@ -46,17 +46,26 @@ namespace son8 {
             static Storage storage_;
             return storage_;
         }
-    }; // class ArgumentsStorage_
+    }; // class `Arguments::Storage`
     // Arguments
     Arguments::Arguments( int argc, char *argv[] ) noexcept
     : implPtr_{ new (Arguments::Storage::get( ).impl_storage ) Impl_{ argc, argv } }
     { }
     Arguments::~Arguments( ) { implPtr_->~Impl_( ); }
-    Arguments::Iterator Arguments::begin( ) const noexcept { return implPtr_->begin( ); }
-    Arguments::Iterator Arguments::end( ) const noexcept { return implPtr_->end( ); }
-    Arguments::Iterator Arguments::cbegin( ) const noexcept { return implPtr_->begin( ); }
-    Arguments::Iterator Arguments::cend( ) const noexcept { return implPtr_->end( ); }
-    int Arguments::size( ) const noexcept { return implPtr_->size( ); }
+    auto Arguments::begin( ) const noexcept  -> Arguments::Iterator { return implPtr_->begin( ); }
+    auto Arguments::end( ) const noexcept    -> Arguments::Iterator { return implPtr_->end( ); }
+    auto Arguments::cbegin( ) const noexcept -> Arguments::Iterator { return implPtr_->begin( ); }
+    auto Arguments::cend( ) const noexcept   -> Arguments::Iterator { return implPtr_->end( ); }
+    auto Arguments::size( ) const noexcept -> int { return implPtr_->size( ); }
+    // array operators
+    // -- safe: argument cannot be empty, is it good to return empty character array then?
+    auto Arguments::operator[]( signed idxSafe ) const -> Arguments::Arg {
+        return ( static_cast< unsigned >( idxSafe ) < size( ) ) ? *( begin( ) + idxSafe ) : "";
+    }
+    // -- unsafe(unsigned)
+    auto Arguments::operator[]( unsigned idx ) const noexcept -> Arguments::Arg {
+        return *( begin( ) + idx );
+    }
     // Exit
     namespace {
         std::atomic< int > exit_value{ EXIT_SUCCESS };

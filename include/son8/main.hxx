@@ -24,15 +24,19 @@ namespace son8 {
         [[nodiscard]] Iterator end( ) const noexcept;
         [[nodiscard]] Iterator cbegin( ) const noexcept;
         [[nodiscard]] Iterator cend( ) const noexcept;
+
+        [[nodiscard]] Arg operator[]( signed idxSafe ) const;
+        [[nodiscard]] Arg operator[]( unsigned idx ) const noexcept;
+
         [[nodiscard]] int size( ) const noexcept;
     }; // class Arguments
 
     using Args = Arguments const &;
 
     void main( Args args );
-} // namespace son8
+} // namespace
 
-#endif//SON8_MAIN_HXX
+#endif // header
 
 // Apache License 2.0
 // NO WARRANTY OF ANY KIND see <http://www.apache.org/licenses/LICENSE-2.0>

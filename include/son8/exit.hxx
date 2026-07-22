@@ -14,7 +14,7 @@ namespace son8 {
         [[noreturn]] void operator()( ) const;
         [[noreturn]] void operator()( int value ) const;
         [[nodiscard]] int get( ) const noexcept;
-        // EXIT_SUCCESS and EXIT_FAILURE (no constexpr to avoid including stdlib header)
+        // EXIT_SUCCESS and EXIT_FAILURE (not a `constexpr` to avoid including `stdlib` header)
         static int const Success;
         static int const Failure;
         [[noreturn]] static void success( );
@@ -26,9 +26,9 @@ namespace son8 {
     }; // class Exit
 
     inline Exit exit;
-} // namespace son8
+} // namespace
 
-#endif//SON8_EXIT_HXX
+#endif // header
 
 // Apache License 2.0
 // NO WARRANTY OF ANY KIND see <http://www.apache.org/licenses/LICENSE-2.0>
