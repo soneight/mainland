@@ -1,7 +1,27 @@
-# MAINLAND
+# `MAINLAND`
 > C++17 Main Function Wrapper
 
 ## Usage
+
+### Install
+> `CMake` install and find package would be supported only on release, so version `v1.0.0`
+
+use `CMake` fetch functionality below
+
+### Fetch
+
+```cmake
+if( NOT TARGET son8__mainland )
+    include( FetchContent )
+    message( STATUS "${APP}: FetchContent `soneight/mainland`" )
+    fetchcontent_declare(
+        son8__mainland
+        GIT_REPOSITORY https://github.com/soneight/mainland.git
+        GIT_TAG        8145becfc18b4c5968ddd61d19540d5a64ec282f # v0.1.1
+    )
+    fetchcontent_makeavailable( son8__mainland )
+endif( )
+```
 
 ### Example
 
@@ -19,7 +39,11 @@ void son8::main( Args args ) {
 ### Quick notes
 
 - `Args`: here is const reference type, same as `Arguments const &`
-- `args`: support `size( ) -> size_t, for range begin/end -> char const *const *`
+- `args`: support
+  - `size( ) -> size_t`
+  - for range `begin/end -> char const *const *`
+  - `operator [signed integer]`: **`S`**`afe` bound checked array access, throws out of range standard exception
+  - `operator [unsigned integer]`: **`U`**nsafe` array access, occasionally spawn standard demons from a caller nose
 - `Exit::Success / Exit::Failure`: `EXIT_SUCCESS / EXIT_FAILURE`
 - `exit = [[ value ]] or Exit::Edit::[[ success( ) / failure( ) ]]`: updating exit value without calling exit
 - `exit( ) or exit( [[ value ]] ) or Exit::[[ success( ) / failure( ) ]]`: emergency exit without clearing stack
@@ -36,3 +60,4 @@ void son8::main( Args args ) {
 > Project Copying Rules with attribution notice
 
 ###### each folder MAY contain README with additional materials
+###### END OF `MAINLAND`
