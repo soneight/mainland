@@ -21,6 +21,7 @@ if( NOT TARGET son8__mainland )
     )
     fetchcontent_makeavailable( son8__mainland )
 endif( )
+message( STATUS "${APP}: target `son8__mainland` found" )
 ```
 
 ### Example
