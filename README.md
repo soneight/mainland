@@ -17,7 +17,7 @@ if( NOT TARGET son8__mainland )
     fetchcontent_declare(
         son8__mainland
         GIT_REPOSITORY https://github.com/soneight/mainland.git
-        GIT_TAG        8145becfc18b4c5968ddd61d19540d5a64ec282f # v0.1.1
+        GIT_TAG        8bba2163f5365d218a90343489e387ba655950c5 # v0.1.2
     )
     fetchcontent_makeavailable( son8__mainland )
 endif( )
