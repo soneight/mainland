@@ -59,7 +59,7 @@ namespace son8 {
     // array operators
     // -- safe(signed)
     auto Arguments::operator[]( signed idxSafe ) const -> Arg {
-        if ( idxSafe < size( )) return *( begin( ) + idxSafe );
+        if ( static_cast< unsigned >( idxSafe ) < static_cast< unsigned >( size( ))) return *( begin( ) + idxSafe );
         throw std::out_of_range{ "son8::mainland: Arguments signed index safe array operator out of range access" };
     }
     // -- unsafe(unsigned)

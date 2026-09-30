@@ -45,6 +45,7 @@ void son8::main( Args args ) {
   - for range `begin/end -> char const *const *`
   - `operator [signed integer]`: **`S`**`afe` bound checked array access, throws out of range standard exception
   - `operator [unsigned integer]`: **`U`**nsafe` array access, occasionally spawn standard demons from a caller nose
+  - Arguments array access require signed int for safe access or unsigned one for unsafe access, other integer types are prohibited
 - `Exit::Success / Exit::Failure`: `EXIT_SUCCESS / EXIT_FAILURE`
 - `exit = [[ value ]] or Exit::Edit::[[ success( ) / failure( ) ]]`: updating exit value without calling exit
 - `exit( ) or exit( [[ value ]] ) or Exit::[[ success( ) / failure( ) ]]`: emergency exit without clearing stack
