@@ -25,10 +25,10 @@ namespace son8 {
         };
     }; // class Exit
 
-    inline Exit exit;
+    inline constexpr Exit exit;
 } // namespace
 
-#endif // header
+#endif//SON8_EXIT_HXX
 
 // Apache License 2.0
 // NO WARRANTY OF ANY KIND see <http://www.apache.org/licenses/LICENSE-2.0>

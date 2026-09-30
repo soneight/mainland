@@ -8,10 +8,10 @@ namespace son8 {
     class Arguments final {
         class Impl_;
         Impl_ *implPtr_;
-        Arguments( int args, char *argv[] ) noexcept;
+        Arguments( int argc, char *argv[] ) noexcept;
     public:
+        struct Storage;
         ~Arguments( );
-        class Storage;
         using Arg = char const *;
         using Iterator = Arg const *;
         Arguments( ) = delete;
@@ -27,6 +27,9 @@ namespace son8 {
 
         [[nodiscard]] Arg operator[]( signed idxSafe ) const;
         [[nodiscard]] Arg operator[]( unsigned idx ) const noexcept;
+        template< typename Type >
+        [[deprecated("son8::mainland Arguments array access require signed int for safe access or unsigned one for unsafe access, other integer types are prohibited")]]
+        void operator[]( Type ) const noexcept { }
 
         [[nodiscard]] int size( ) const noexcept;
     }; // class Arguments
@@ -36,7 +39,7 @@ namespace son8 {
     void main( Args args );
 } // namespace
 
-#endif // header
+#endif//SON8_MAIN_HXX
 
 // Apache License 2.0
 // NO WARRANTY OF ANY KIND see <http://www.apache.org/licenses/LICENSE-2.0>

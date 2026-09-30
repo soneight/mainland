@@ -28,11 +28,11 @@ message( STATUS "${APP}: target `son8__mainland` found" )
 
 ```cxx
 #include <son8/main.hxx>
-// son8::exit is return replacement class thats calls std::exit
+// son8::exit is return replacement class that's calls std::exit
 void son8::main( Args args ) {
-    auto mainland = ( args.end( ) - args.begin( ) );
+    auto mainland = ( args.end( ) - args.begin( ));
     if ( mainland % 2 == 0 ) exit = 8;
-    if ( args.size( ) > 2 ) exit( args.size( ) );
+    if ( args.size( ) > 2 ) exit( args.size( ));
     if ( exit.get( ) == 8 ) exit( );
 } // return args|1 = 0, args|2 = 8, args|3+ = 3+
 ```
@@ -41,7 +41,7 @@ void son8::main( Args args ) {
 
 - `Args`: here is const reference type, same as `Arguments const &`
 - `args`: support
-  - `size( ) -> size_t`
+  - `size( ) -> int`: so typical `args[args.size( )]` would throw instead of segfault
   - for range `begin/end -> char const *const *`
   - `operator [signed integer]`: **`S`**`afe` bound checked array access, throws out of range standard exception
   - `operator [unsigned integer]`: **`U`**nsafe` array access, occasionally spawn standard demons from a caller nose
